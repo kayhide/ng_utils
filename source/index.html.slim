@@ -1,0 +1,20 @@
+---
+title: リンク作成
+ng_controller: MakeLinkCtrl
+---
+
+.form-group
+  label URL
+  input.form-control type="text" ng-model="url" placeholder="URL"
+.form-group
+  label アンカーテキスト
+  input.form-control type="text" ng-model="anchor" placeholder="アンカーテキスト"
+.form-group
+  label 説明文
+  textarea.form-control ng-model="description" placeholder="説明文" rows="4"
+.form-group
+  label コード
+  textarea.form-control readonly="readonly" rows="7" {{code()}}
+.panel.panel-info
+  .panel-heading プレビュー
+  .panel-body ng-bind-html="code()"
