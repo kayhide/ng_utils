@@ -18,6 +18,11 @@ ng_controller: MakeLinkCtrl
 .form-group
   label コード
   textarea.form-control readonly="readonly" rows="7" {{code()}}
+  p
+    button.btn.btn-primary clip-copy="GetCodeToCopy()" clip-click="copied=true"
+      i.fa.fa-clipboard>
+      | コピー
+    span.text-primary< ng-show="copied" コピーしました。
 .panel.panel-info
   .panel-heading プレビュー
   .panel-body ng-bind-html="code()"

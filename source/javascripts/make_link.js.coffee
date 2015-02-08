@@ -1,10 +1,11 @@
-app = angular.module('utilsApp', [])
+app = angular.module('utilsApp', ['ngClipboard'])
 
 app.controller 'MakeLinkCtrl', ($scope, $sce, $http)->
   $scope.url = ''
   $scope.anchor = ''
   $scope.fetching = false
   $scope.failed = false
+  $scope.copied = false
 
   $scope.description_with_br = ->
     $scope.description?.replace(/\r?\n/g, '<br />') || ''
@@ -20,6 +21,13 @@ app.controller 'MakeLinkCtrl', ($scope, $sce, $http)->
       "#{$scope.url_without_protocol()}\n" +
       '</p>\n'
     )
+
+  for name in ['url', 'anchor', 'description']
+    $scope.$watch name, ->
+      $scope.copied = false
+
+  $scope.GetCodeToCopy = ->
+    $scope.code().$$unwrapTrustedValue()
 
   $scope.Fetch = ->
     $scope.anchor = ''
@@ -40,9 +48,10 @@ app.controller 'MakeLinkCtrl', ($scope, $sce, $http)->
             $scope.anchor = doc.title
             for prefix in ['', 'og:', 'twitter:']
               for e in doc.head.getElementsByTagName('meta')
-                if e.name == (prefix + 'description') && e.content?
+                if e.name == (prefix + 'description') && e.content.length > 0
                   $scope.description = e.content
                   break
+              break if $scope.description.length > 0
       error: ->
         $scope.fetching = false
         $scope.failed = true
