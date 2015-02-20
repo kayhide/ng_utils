@@ -1,6 +1,6 @@
-app = angular.module('utilsApp', ['ngClipboard'])
+angular.module('utilsApp')
 
-app.controller 'MakeLinkCtrl', ($scope, $sce, $http)->
+.controller 'MakeLinkController', ($scope, $sce, $http)->
   $scope.url = ''
   $scope.anchor = ''
   $scope.fetching = false
@@ -55,11 +55,3 @@ app.controller 'MakeLinkCtrl', ($scope, $sce, $http)->
       error: ->
         $scope.fetching = false
         $scope.failed = true
-
-.filter 'strip_protocol', ->
-  (url)->
-    url?.replace(/^[^:]+?:\/\//, '')
-
-.filter 'insert_br', ->
-  (text)->
-    text?.replace(/\r?\n/g, '<br />')
