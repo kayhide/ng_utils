@@ -17,10 +17,12 @@ html
     header
       .navbar.navbar-default
         .container
-          .navbar-header
-            = link_to 'index.html', class: 'navbar-brand' do
-              = current_page.data.title
-              small= current_page.data.subtitle
+          .navbar-brand 構造的空隙
+          ul.nav.navbar-nav
+            - menu = {'index.html' => 'リンク作成', 'headering.html' => '記事整形'}
+            - menu.each do |path, title|
+              li class=((current_page.data.title == title) ? 'active' : nil)
+                = link_to title, path
     .container ng-controller=current_page.data.ng_controller
       .row
         .col-md-12
