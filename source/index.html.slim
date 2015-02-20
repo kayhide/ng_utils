@@ -2,27 +2,29 @@
 title: リンク作成
 ng_controller: MakeLinkController
 ---
-
-.form-group ng-class="{'has-error': failed}"
-  label URL
-  input.form-control type="text" ng-model="url" ng-blur="Fetch()" placeholder="URL"
-  p.help-block.text-danger ng-show="failed" 取得できませんでした。
-.form-group.has-feedback
-  label アンカーテキスト
-  input.form-control type="text" ng-model="anchor" placeholder="アンカーテキスト"
-  i.fa.fa-spinner.fa-pulse.form-control-feedback.text-success ng-show="fetching"
-.form-group.has-feedback
-  label 説明文
-  textarea.form-control ng-model="description" placeholder="説明文" rows="4"
-  i.fa.fa-spinner.fa-pulse.form-control-feedback.text-success ng-show="fetching"
-.form-group
-  label コード
-  textarea.form-control readonly="readonly" rows="7" {{code()}}
-  p
-    button.btn.btn-primary clip-copy="GetCodeToCopy()" clip-click="copied=true"
-      i.fa.fa-clipboard>
-      | コピー
-    span.text-primary< ng-show="copied" コピーしました。
-.panel.panel-info
-  .panel-heading プレビュー
-  .panel-body ng-bind-html="code()"
+.row
+  .col-md-6
+    .form-group ng-class="{'has-error': failed}"
+      label URL
+      input.form-control type="text" ng-model="url" ng-blur="Fetch()" placeholder="URL"
+      p.help-block.text-danger ng-show="failed" 取得できませんでした。
+    .form-group.has-feedback
+      label アンカーテキスト
+      input.form-control type="text" ng-model="anchor" placeholder="アンカーテキスト"
+      i.fa.fa-spinner.fa-pulse.form-control-feedback.text-success ng-show="fetching"
+    .form-group.has-feedback
+      label 説明文
+      textarea.form-control ng-model="description" placeholder="説明文" rows="4"
+      i.fa.fa-spinner.fa-pulse.form-control-feedback.text-success ng-show="fetching"
+    .form-group
+      label コード
+      textarea.form-control readonly="readonly" rows="7" {{code()}}
+      p
+        button.btn.btn-primary clip-copy="GetCodeToCopy()" clip-click="copied=true"
+          i.fa.fa-clipboard>
+          | コピー
+        span.text-primary< ng-show="copied" コピーしました。
+  .col-md-6
+    .panel.panel-info
+      .panel-heading プレビュー
+      .panel-body ng-bind-html="code()"
